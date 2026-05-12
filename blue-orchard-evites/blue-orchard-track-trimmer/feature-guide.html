@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Blue Orchard Track Trimmer Feature Guide</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: #0f1f35;
+      --panel-2: #132a47;
+      --text: #f4f8ff;
+      --muted: #b8c7da;
+      --accent: #66d9ef;
+      --accent-2: #f7c948;
+      --success: #8af0b0;
+      --border: rgba(255,255,255,0.14);
+      --shadow: rgba(0,0,0,0.35);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(102,217,239,0.20), transparent 32rem),
+        radial-gradient(circle at bottom right, rgba(247,201,72,0.13), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: var(--accent);
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 34px 0 56px;
+    }
+
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 22px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .top-nav a {
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .hero {
+      padding: clamp(32px, 6vw, 64px);
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      background: linear-gradient(135deg, rgba(15,31,53,0.96), rgba(19,42,71,0.82));
+      box-shadow: 0 24px 90px var(--shadow);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero::after {
+      content: "INTRO   TRIM   OUTRO";
+      position: absolute;
+      right: -30px;
+      bottom: 20px;
+      font-weight: 900;
+      font-size: clamp(2.6rem, 9vw, 7rem);
+      color: rgba(255,255,255,0.035);
+      letter-spacing: -0.08em;
+      white-space: nowrap;
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(102,217,239,0.14);
+      border: 1px solid rgba(102,217,239,0.32);
+      color: var(--accent);
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+
+    h1 {
+      margin: 18px 0 16px;
+      font-size: clamp(2.35rem, 6vw, 5rem);
+      line-height: 1.02;
+      letter-spacing: -0.055em;
+    }
+
+    .lead {
+      max-width: 830px;
+      color: var(--muted);
+      font-size: clamp(1.08rem, 2.2vw, 1.35rem);
+      margin: 0;
+    }
+
+    .quote {
+      margin: 28px 0 0;
+      padding: 20px 22px;
+      border-left: 4px solid var(--accent-2);
+      background: rgba(255,255,255,0.06);
+      border-radius: 18px;
+      font-size: 1.18rem;
+      font-weight: 800;
+    }
+
+    .toc {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
+      margin: 28px 0;
+    }
+
+    .toc a {
+      display: block;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.055);
+      text-decoration: none;
+      color: var(--text);
+      font-weight: 800;
+    }
+
+    .toc a:hover,
+    .toc a:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(102,217,239,0.11);
+    }
+
+    section {
+      margin-top: 28px;
+      padding: clamp(24px, 4vw, 36px);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: rgba(15,31,53,0.78);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.22);
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      line-height: 1.12;
+      letter-spacing: -0.04em;
+    }
+
+    h3 {
+      margin: 26px 0 8px;
+      color: var(--accent-2);
+      font-size: 1.3rem;
+    }
+
+    h4 {
+      margin: 18px 0 6px;
+      font-size: 1.08rem;
+      color: var(--accent);
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    ul {
+      margin-top: 8px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+    }
+
+    .mini-card {
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.055);
+    }
+
+    .mini-card strong {
+      color: var(--accent-2);
+    }
+
+    .callout {
+      padding: 18px;
+      border-radius: 20px;
+      border: 1px solid rgba(138,240,176,0.28);
+      background: rgba(138,240,176,0.08);
+      margin: 18px 0;
+    }
+
+    .plan-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 18px;
+      margin-top: 18px;
+    }
+
+    .plan-table th,
+    .plan-table td {
+      padding: 14px;
+      border: 1px solid var(--border);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .plan-table th {
+      background: rgba(102,217,239,0.13);
+      color: var(--text);
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      padding: 34px 0 0;
+    }
+
+    .footer a {
+      font-weight: 800;
+    }
+
+    @media (max-width: 680px) {
+      .top-nav {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .plan-table,
+      .plan-table thead,
+      .plan-table tbody,
+      .plan-table th,
+      .plan-table td,
+      .plan-table tr {
+        display: block;
+      }
+
+      .plan-table th {
+        display: none;
+      }
+
+      .plan-table td {
+        border-bottom: 0;
+      }
+
+      .plan-table tr {
+        margin-bottom: 14px;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        overflow: hidden;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <nav class="top-nav" aria-label="Page navigation">
+      <a href="/blue-orchard-track-trimmer/">← Back to Track Trimmer</a>
+      <span>Blue Orchard Innovations, Inc.</span>
+    </nav>
+
+    <header class="hero">
+      <span class="eyebrow">Feature Guide</span>
+      <h1>Blue Orchard Track Trimmer</h1>
+      <p class="lead">
+        A practical guide to using Blue Orchard Track Trimmer to shorten, remix, and prepare audio for podcasts, social clips, ministry media, video projects, and branded creator workflows.
+      </p>
+      <div class="quote">
+        “I need this music shorter — but I don’t want it to sound chopped up.”
+      </div>
+    </header>
+
+    <nav class="toc" aria-label="Feature guide sections">
+      <a href="#overview">Overview</a>
+      <a href="#main-screen">Main Screen</a>
+      <a href="#quick-shorten">Quick Shorten</a>
+      <a href="#smart-remix">Smart Remix</a>
+      <a href="#presets">Presets</a>
+      <a href="#podcast-builder">Podcast Builder</a>
+      <a href="#plans">Free vs Creator</a>
+      <a href="#account-welcome">Account & Welcome</a>
+    </nav>
+
+    <section id="overview">
+      <h2>Overview</h2>
+      <p>
+        Blue Orchard Track Trimmer solves a common audio production problem: creators often need music to fit a precise length, but manual trimming can damage the feel of the track.
+      </p>
+      <p>
+        When audio is cut poorly, intros disappear, endings stop abruptly, vocals jump, beat timing breaks, and podcast music can loop awkwardly. Track Trimmer focuses on preserving the musical identity of the original audio while shortening it for practical production use.
+      </p>
+
+      <div class="grid">
+        <div class="mini-card"><strong>Best for:</strong><br />podcast intros, social clips, transition music, reflection beds, outros, and short-form video audio.</div>
+        <div class="mini-card"><strong>Main goal:</strong><br />shorten audio without making it sound randomly chopped or unfinished.</div>
+        <div class="mini-card"><strong>Core idea:</strong><br />preserve the intro, remove or rebuild the middle, and keep the outro when needed.</div>
+      </div>
+    </section>
+
+    <section id="main-screen">
+      <h2>Main Screen — Audio Trimming Engine</h2>
+      <p>
+        The Main Screen is the production workspace. Users upload an audio file and choose between two workflows: <strong>Quick Shorten</strong> and <strong>Smart Remix</strong>.
+      </p>
+
+      <h3>After processing</h3>
+      <ul>
+        <li>Preview the processed audio immediately.</li>
+        <li>Scrub through the result with a progress slider.</li>
+        <li>Review BPM information when available.</li>
+        <li>Share or download the finished file.</li>
+      </ul>
+
+      <div class="callout">
+        <strong>Practical use:</strong> A creator preparing a podcast intro can upload a long music track, choose a target length, preview the result, and export a ready-to-use file without opening a full audio editing program.
+      </div>
+    </section>
+
+    <section id="quick-shorten">
+      <h2>Quick Shorten</h2>
+      <p>
+        Quick Shorten is built for fast, practical edits where speed matters more than deep restructuring. Instead of simply cutting from the beginning or end, the app removes material from the middle while preserving the intro, ending, and overall flow.
+      </p>
+
+      <h3>Practical use cases</h3>
+      <div class="grid">
+        <div class="mini-card">
+          <strong>Podcast intro music</strong>
+          <p>A creator has a two-minute cinematic track but only needs a 12-second intro, a 20-second reflection bed, or a 6-second transition sting.</p>
+        </div>
+        <div class="mini-card">
+          <strong>Church and ministry media</strong>
+          <p>A ministry can shorten worship instrumentals for countdowns, livestream transitions, social clips, and podcast intros without needing audio engineering skills.</p>
+        </div>
+        <div class="mini-card">
+          <strong>Radio and broadcast</strong>
+          <p>A producer can create a 60–90 second edit while preserving recognizable hooks and musical timing.</p>
+        </div>
+        <div class="mini-card">
+          <strong>Social media creators</strong>
+          <p>Shorten music for Reels, TikTok, YouTube Shorts, and promotional clips while retaining energy and branding.</p>
+        </div>
+      </div>
+
+      <h3>Target Length</h3>
+      <p>
+        Users can type a custom duration or choose preset chips such as Radio Edit, Social Clip, or Podcast Bed. This makes the workflow duration-first: the user decides the final length, and the app handles the shortening.
+      </p>
+
+      <h3>Crossfade Slider</h3>
+      <p>
+        The crossfade slider controls how smoothly the removed sections reconnect. Shorter crossfades are better for rhythmic tracks, percussion-heavy music, and fast edits. Longer crossfades work better for ambient, orchestral, worship, and cinematic tracks.
+      </p>
+
+      <h3>Natural Mode</h3>
+      <p>
+        Natural Mode uses smoother fade curves so cuts sound less mechanical and more intentionally mixed. It is especially helpful for emotional music, cinematic scores, acoustic recordings, and reflective audio beds.
+      </p>
+
+      <h3>Smart Cuts</h3>
+      <p>
+        Smart Cuts attempts to place edits on musical boundaries instead of arbitrary milliseconds. This helps prevent skipped drums, clipped vocals, broken timing, and awkward transitions.
+      </p>
+
+      <h3>Preserve Intro & Outro</h3>
+      <p>
+        This toggle protects the beginning and ending of the track. It is especially useful when the opening contains a recognizable musical signature or the ending contains an important emotional resolution.
+      </p>
+
+      <h3>Advanced Controls: Intro Keep % and Outro Keep %</h3>
+      <p>
+        These controls let users decide whether the shortened version should preserve more of the beginning, more of the ending, or a balanced amount of both.
+      </p>
+
+      <div class="callout">
+        <strong>Example:</strong> A cinematic trailer track may need 40% of the intro preserved and only 15% of the outro. A reflective spoken-word bed may need less intro and more ending resolution.
+      </div>
+    </section>
+
+    <section id="smart-remix">
+      <h2>Smart Remix</h2>
+      <p>
+        Smart Remix is the premium intelligent reconstruction mode. Instead of only removing the middle, it analyzes the actual musical structure and rebuilds the track around meaningful sections such as intro, verse, chorus, bridge, and outro.
+      </p>
+
+      <h3>Why it matters</h3>
+      <p>
+        Most music has an emotional structure. Simple cuts can remove build-up, interrupt tension and release, or destroy transitions. Smart Remix is designed to preserve storytelling, energy progression, and emotional pacing.
+      </p>
+
+      <div class="grid">
+        <div class="mini-card">
+          <strong>Trailer editors</strong>
+          <p>Create shorter cinematic versions that preserve rise, climax, and release.</p>
+        </div>
+        <div class="mini-card">
+          <strong>Church countdown videos</strong>
+          <p>Fit music to exact timing while preserving recognizable movement and flow.</p>
+        </div>
+        <div class="mini-card">
+          <strong>Reflection podcasts</strong>
+          <p>Build background music that evolves naturally instead of looping awkwardly.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="presets">
+      <h2>Presets Screen</h2>
+      <p>
+        Presets turn complex trimming choices into one-tap workflows. A user taps a preset, and the app loads the recommended settings on the Main Screen.
+      </p>
+
+      <h3>Free presets</h3>
+      <ul>
+        <li><strong>Radio Edit:</strong> 60% of the original length with a 2.5 second crossfade.</li>
+        <li><strong>Social Clip:</strong> 60 seconds with a 2.0 second crossfade.</li>
+        <li><strong>Podcast Bed:</strong> 90 seconds with a 3.0 second crossfade.</li>
+      </ul>
+
+      <h3>Creator presets</h3>
+      <ul>
+        <li><strong>Intro Music:</strong> 12 seconds for podcast opens, YouTube intros, and branded clips.</li>
+        <li><strong>Transition Bed:</strong> 6 seconds for segment changes, topic shifts, and ad transitions.</li>
+        <li><strong>Reflection Bed:</strong> 20 seconds for spoken reflections, inspirational narration, and meditative commentary.</li>
+        <li><strong>Outro Music:</strong> 10 seconds for clean endings and emotional closure.</li>
+      </ul>
+    </section>
+
+    <section id="podcast-builder">
+      <h2>Podcast Builder — Creator Only</h2>
+      <p>
+        Podcast Builder turns Track Trimmer from a simple audio utility into a podcast production tool. Users upload background music and an optional voice recording, then generate a polished mixed podcast segment.
+      </p>
+
+      <h3>What it does</h3>
+      <ul>
+        <li>Accepts background music and optional voice narration.</li>
+        <li>Uses quick preset buttons for common lengths: 6 seconds, 12 seconds, and 20 seconds.</li>
+        <li>Supports a custom duration slider from 6 to 120 seconds.</li>
+        <li>Outputs a stereo MP3 ready for a podcast editor.</li>
+      </ul>
+
+      <h3>Practical use cases</h3>
+      <div class="grid">
+        <div class="mini-card">
+          <strong>Independent podcasters</strong>
+          <p>Create intros, transitions, and reflection segments without learning a full digital audio workstation.</p>
+        </div>
+        <div class="mini-card">
+          <strong>Ministries</strong>
+          <p>Rapidly create devotionals, message intros, reflection clips, and daily encouragement segments.</p>
+        </div>
+        <div class="mini-card">
+          <strong>Coaches and creators</strong>
+          <p>Generate branded affirmations, intro beds, guided reflection segments, and short motivational audio pieces.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="plans">
+      <h2>Free vs Creator Plan</h2>
+      <p>
+        The Free plan gives users a useful entry point. The Creator plan is built for people who create content regularly and need larger files, professional exports, and advanced workflows.
+      </p>
+
+      <table class="plan-table">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Free</th>
+            <th>Creator — $9.99/mo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Maximum upload</td>
+            <td>5 minutes / 50 MB</td>
+            <td>20 minutes / 200 MB</td>
+          </tr>
+          <tr>
+            <td>Export format</td>
+            <td>MP3 only</td>
+            <td>MP3 and WAV</td>
+          </tr>
+          <tr>
+            <td>Stereo export</td>
+            <td>Not included</td>
+            <td>Included</td>
+          </tr>
+          <tr>
+            <td>Smart Remix</td>
+            <td>Not included</td>
+            <td>Included</td>
+          </tr>
+          <tr>
+            <td>Podcast Builder</td>
+            <td>Not included</td>
+            <td>Included</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="account-welcome">
+      <h2>Account Screen & Welcome Screen</h2>
+
+      <h3>Account Screen</h3>
+      <p>
+        The Account Screen shows the current plan, explains Creator features, and provides subscription management options such as Manage Subscription and Restore Purchase.
+      </p>
+      <p>
+        Restore Purchase is important because users expect their access to continue after reinstalling the app, changing devices, or updating the app.
+      </p>
+
+      <h3>Welcome / Splash Screen</h3>
+      <p>
+        The Welcome Screen introduces the product visually on cold start. The animated scissors icon, waveform visualization, and INTRO / TRIM / OUTRO zones quickly teach users what the app does: preserve important parts of the track while removing or rebuilding the middle.
+      </p>
+
+      <div class="callout">
+        <strong>Production note:</strong> The hidden tester mode is useful for internal QA, but it should be disabled or protected before broad public release.
+      </div>
+    </section>
+
+    <footer class="footer">
+      <a href="/blue-orchard-track-trimmer/">Back to Blue Orchard Track Trimmer</a><br />
+      © 2026 Blue Orchard Innovations, Inc.
+    </footer>
+  </main>
+</body>
+</html>

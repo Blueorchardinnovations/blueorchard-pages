@@ -5,23 +5,157 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Blue Orchard Track Trimmer</title>
   <link rel="stylesheet" href="/styles.css" />
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: #0f1f35;
+      --panel-2: #132a47;
+      --text: #f4f8ff;
+      --muted: #b8c7da;
+      --accent: #66d9ef;
+      --accent-2: #f7c948;
+      --border: rgba(255,255,255,0.14);
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at top left, rgba(102, 217, 239, 0.20), transparent 32rem),
+        radial-gradient(circle at bottom right, rgba(247, 201, 72, 0.13), transparent 28rem),
+        var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    .container {
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 56px 0 40px;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 48px 24px;
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: linear-gradient(135deg, rgba(15,31,53,0.94), rgba(19,42,71,0.84));
+      box-shadow: 0 24px 80px rgba(0,0,0,0.35);
+    }
+
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(2.35rem, 6vw, 4.8rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+    }
+
+    .subtitle {
+      max-width: 820px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: clamp(1.1rem, 2.5vw, 1.35rem);
+    }
+
+    .card {
+      margin: 28px auto 0;
+      max-width: 850px;
+      padding: 24px;
+      border-radius: 22px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 800;
+      color: #06101c;
+      background: var(--accent);
+      box-shadow: 0 10px 30px rgba(102,217,239,0.22);
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+
+    .links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 14px;
+      margin: 32px 0;
+    }
+
+    .links a {
+      display: block;
+      padding: 16px 18px;
+      border-radius: 18px;
+      color: var(--text);
+      text-decoration: none;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      font-weight: 700;
+    }
+
+    .links a:hover,
+    .links a:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(102,217,239,0.12);
+    }
+
+    footer {
+      color: var(--muted);
+      text-align: center;
+      padding-top: 20px;
+      font-size: 0.95rem;
+    }
+
+    footer a {
+      color: var(--accent);
+    }
+  </style>
 </head>
 
 <body>
   <div class="container">
-    <h1>Blue Orchard Track Trimmer</h1>
+    <section class="hero">
+      <h1>Blue Orchard Track Trimmer</h1>
 
-    <p class="subtitle">
-      Smart audio trimming for creators who need polished intros, transitions, background beds, and outros without awkward cuts.
-    </p>
-
-    <div class="card">
-      <p>
-        Blue Orchard Track Trimmer helps creators reshape background music to fit precise durations while preserving the natural feel of the track, including intros, endings, transitions, and musical flow.
+      <p class="subtitle">
+        Smart audio trimming for creators who need polished intros, transitions, background beds, and outros without awkward cuts.
       </p>
-    </div>
+
+      <div class="card">
+        <p>
+          Blue Orchard Track Trimmer helps creators reshape background music to fit precise durations while preserving the natural feel of the track, including intros, endings, transitions, and musical flow.
+        </p>
+      </div>
+
+      <div class="cta-row">
+        <a class="button" href="/blue-orchard-track-trimmer/feature-guide/">View Feature Guide</a>
+        <a class="button secondary" href="/blue-orchard-track-trimmer/support/">Get Support</a>
+      </div>
+    </section>
 
     <div class="links">
+      <a href="/blue-orchard-track-trimmer/feature-guide/">Feature Guide</a>
       <a href="/blue-orchard-track-trimmer/support/">Support</a>
       <a href="/blue-orchard-track-trimmer/privacy/">Privacy Policy</a>
       <a href="/blue-orchard-track-trimmer/terms/">Terms of Use</a>
