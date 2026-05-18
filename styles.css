@@ -81,6 +81,7 @@ h1 {
 h2 {
   font-size: clamp(1.75rem, 2.5vw, 2.6rem);
   line-height: 1.12;
+  color: inherit;
 }
 
 h3 {
